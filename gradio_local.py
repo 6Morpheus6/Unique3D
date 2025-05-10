@@ -16,6 +16,7 @@ if __name__ == "__main__":
 
 import gradio as gr
 import argparse
+import gc
 
 from app.gradio_3dgen import create_ui as create_3d_ui
 # from app.gradio_3dgen_steps import create_step_ui
@@ -38,7 +39,10 @@ def launch(
     gradio_root="",
 ):
     model_zoo.init_models()
-        
+
+    gc.collect()
+    torch.cuda.empty_cache()
+
     with gr.Blocks(
         title=_TITLE,
         theme=gr.themes.Monochrome(),
@@ -64,7 +68,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     args, extra = parser.parse_known_args()
     parser.add_argument("--listen", action="store_true")
-    parser.add_argument("--port", type=int, default=0)
+    parser.add_argument("--port", type=int, default=7860)
     parser.add_argument("--share", action="store_true")
     parser.add_argument("--gradio_root", default="")
     args = parser.parse_args()
