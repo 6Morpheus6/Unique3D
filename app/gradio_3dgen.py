@@ -70,7 +70,7 @@ def create_ui(concurrency_id="wkl"):
             )
         with gr.Column(scale=3):
             output_mesh = gr.Model3D(value=None, label="Mesh Model", show_label=True, height=320)
-            output_video = gr.Video(label="Preview", show_label=True, show_share_button=True, height=320, visible=True)
+            output_video = gr.Video(label="Preview", show_label=True, show_share_button=True, height=320, visible=False)
             input_processing = gr.Checkbox(value=True, label='Remove Background')
             do_refine = gr.Checkbox(value=True, label="Refine Multiview Details", visible=False)
             expansion_weight = gr.Slider(minimum=-1., maximum=1.0, value=0.1, step=0.1, label="Expansion Weight", visible=False)
